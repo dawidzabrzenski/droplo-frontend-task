@@ -1,6 +1,11 @@
 import { useForm } from "react-hook-form";
 
-function CreateForm({ onSubmit, parentId = null, onCancel }) {
+function CreateForm({
+  onSubmit,
+  parentId = null,
+  onCancel,
+  setCreateFormStatus,
+}) {
   const {
     register,
     handleSubmit,
@@ -10,13 +15,12 @@ function CreateForm({ onSubmit, parentId = null, onCancel }) {
 
   const handleFormSubmit = (data) => {
     const newItem = {
-      id: Date.now().toString(),
-      label: data.name,
-      url: data.link || "",
+      id: Date.now(),
+      name: data.name,
+      url: data.url || null,
       children: [],
     };
-
-    onSubmit(newItem, parentId);
+    onSubmit(newItem);
     reset();
   };
 
@@ -40,7 +44,6 @@ function CreateForm({ onSubmit, parentId = null, onCancel }) {
         )}
       </div>
 
-      {/* Pole Link */}
       <div className="flex flex-col relative gap-1">
         <label className="text-text-secondary leading-5 font-[500] text-sm">
           Link
@@ -58,11 +61,16 @@ function CreateForm({ onSubmit, parentId = null, onCancel }) {
         />
       </div>
 
-      {/* Przycisk Akcji */}
       <div className="flex gap-2 mt-3">
         <button
           type="button"
-          onClick={onCancel} // Funkcja anulowania
+          onClick={() => {
+            if (!parentId) {
+              setCreateFormStatus(false);
+            } else {
+              onCancel();
+            }
+          }}
           className="py-[10px] px-[14px] border border-button-secondary-border rounded-md shadow-sm text-button-secondary-fg font-semibold text-sm"
         >
           Anuluj

@@ -14,7 +14,7 @@ const inter = Inter({
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable}`}>
-      <body>{children}</body>
+      <body className="bg-[#f5f5f5]">{children}</body>
     </html>
   );
 }
