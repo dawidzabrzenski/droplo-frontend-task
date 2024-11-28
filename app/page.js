@@ -10,7 +10,7 @@ function Home() {
   const [createFormStatus, setCreateFormStatus] = useState(false);
 
   return (
-    <main className="w-full h-screen bg-[#f5f5f5] flex flex-col items-center py-6 px-4 gap-6">
+    <main className="w-full h-full bg-[#f5f5f5] flex flex-col items-center py-6 px-4 gap-6">
       <EmptyMenu setCreateFormStatus={setCreateFormStatus} />
       <FormList
         createFormStatus={createFormStatus}

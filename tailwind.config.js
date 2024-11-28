@@ -11,8 +11,9 @@ module.exports = {
       colors: {
         "bg-primary": "#fff",
         "bg-secondary": "#f9fafb",
+        "bg-alt": "#f5f5f5",
         "border-primary": "#d0d5dd",
-        "border-secondary": "#f9fafb",
+        "border-secondary": "#eaecf0",
         "button-primary-bg": "#7f59d9",
         "button-secondary-color-bg": "#fff",
         "button-primary-border": "#7f59d9",
