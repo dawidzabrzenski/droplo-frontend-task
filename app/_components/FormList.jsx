@@ -14,7 +14,7 @@ function FormList({ createFormStatus, setCreateFormStatus }) {
           if (el.id === parentId) {
             return {
               ...el,
-              children: [...el.children, child],
+              children: [...el.children, { ...child, parentId }],
             };
           }
           if (el.children) {
@@ -31,6 +31,35 @@ function FormList({ createFormStatus, setCreateFormStatus }) {
     }
   };
 
+  // Funkcja usuwania elementu
+  const handleRemoveItem = (id, parentId = null) => {
+    if (parentId === null) {
+      // Usuwanie elementu głównego
+      setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    } else {
+      // Usuwanie elementu z dzieci
+      const removeChild = (items, parentId, childId) => {
+        return items.map((el) => {
+          if (el.id === parentId) {
+            return {
+              ...el,
+              children: el.children.filter((child) => child.id !== childId),
+            };
+          }
+          if (el.children) {
+            return {
+              ...el,
+              children: removeChild(el.children, parentId, childId),
+            };
+          }
+          return el;
+        });
+      };
+
+      setItems((prevItems) => removeChild(prevItems, parentId, id));
+    }
+  };
+
   return (
     <div className="w-full flex flex-col gap-12">
       {createFormStatus && (
@@ -40,10 +69,18 @@ function FormList({ createFormStatus, setCreateFormStatus }) {
         />
       )}
 
-      {items.length > 0 &&
+      {items.length > 0 ? (
         items.map((item) => (
-          <FormItem key={item.id} item={item} onAddChild={handleAddItem} />
-        ))}
+          <FormItem
+            key={item.id}
+            item={item}
+            onAddChild={handleAddItem}
+            onRemoveItem={handleRemoveItem} // Przekazanie funkcji do FormItem
+          />
+        ))
+      ) : (
+        <div>Brak elementów w menu.</div>
+      )}
     </div>
   );
 }

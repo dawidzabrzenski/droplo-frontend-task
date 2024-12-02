@@ -71,7 +71,7 @@ function CreateForm({
               onCancel();
             }
           }}
-          className="py-[10px] px-[14px] border border-button-secondary-border rounded-md shadow-sm text-button-secondary-fg font-semibold text-sm"
+          className={`py-[10px] px-[14px] border border-button-secondary-border rounded-md shadow-sm text-button-secondary-fg font-semibold text-sm`}
         >
           Anuluj
         </button>
@@ -79,7 +79,7 @@ function CreateForm({
           type="submit"
           className="py-[10px] px-[14px] border border-button-secondary-color-border rounded-md shadow-sm text-button-secondary-color-fg font-semibold text-sm"
         >
-          {parentId ? "Dodaj podpunkt" : "Dodaj"}
+          Dodaj
         </button>
       </div>
     </form>
