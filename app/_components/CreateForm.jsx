@@ -17,7 +17,7 @@ function CreateForm({
     const newItem = {
       id: Date.now(),
       name: data.name,
-      url: data.url || null,
+      url: data.link || null,
       children: [],
     };
     onSubmit(newItem);
